@@ -122,3 +122,67 @@ O sistema deve controlar o cadastro de carros, usuários, reservas, alocações,
 * `categorias (id, nome, regras_especiais)`
 
 ---
+
+# Stack utilizada
+
+- Python (Linguagem OO)
+- Flask (Backend)
+- SQLAlchemy (ORM)
+- React (frontend)
+
+Esboço da estrutura de pastas
+```bash
+/projeto-locadora
+│
+├─ backend/                      # API em Flask
+│  ├─ app/                        # Pacote principal da aplicação
+│  │  ├─ __init__.py              # Inicializa a aplicação Flask e o SQLAlchemy
+│  │  ├─ models/                  # Modelos do banco de dados (ORM)
+│  │  │  ├─ __init__.py
+│  │  │  ├─ usuario.py
+│  │  │  ├─ veiculo.py
+│  │  │  ├─ reserva.py
+│  │  │  ├─ alocacao.py
+│  │  │  └─ multa.py
+│  │  ├─ routes/                  # Rotas (endpoints da API)
+│  │  │  ├─ __init__.py
+│  │  │  ├─ usuario_routes.py
+│  │  │  ├─ veiculo_routes.py
+│  │  │  ├─ reserva_routes.py
+│  │  │  ├─ alocacao_routes.py
+│  │  │  └─ multa_routes.py
+│  │  ├─ services/                # Lógica de negócio (opcional, para deixar rotas limpas)
+│  │  │  ├─ __init__.py
+│  │  │  ├─ reserva_service.py
+│  │  │  └─ multa_service.py
+│  │  ├─ schemas/                 # (opcional) validação de dados/serialização (pydantic/marshmallow)
+│  │  └─ config.py                # Configurações (DB URI, variáveis de ambiente)
+│  │
+│  ├─ venv/                       # Ambiente virtual (não versionar no Git)
+│  ├─ app.py                       # Ponto de entrada (inicia a app)
+│  ├─ requirements.txt             # Dependências do Python
+│  └─ instance/                    # Arquivos de configuração local (ex.: dev.sqlite)
+│
+├─ frontend/                       # Aplicação React
+│  ├─ public/
+│  ├─ src/
+│  │  ├─ components/               # Componentes reutilizáveis
+│  │  │  ├─ Navbar.jsx
+│  │  │  └─ Footer.jsx
+│  │  ├─ pages/                    # Páginas principais
+│  │  │  ├─ Home.jsx
+│  │  │  ├─ Usuarios.jsx
+│  │  │  ├─ Veiculos.jsx
+│  │  │  └─ Reservas.jsx
+│  │  ├─ services/                 # Consumo da API (ex.: axios)
+│  │  │  └─ api.js
+│  │  ├─ App.jsx
+│  │  └─ index.jsx
+│  ├─ package.json
+│  └─ vite.config.js (ou similar)
+│
+└─ docs/                           # Documentação
+   ├─ DER.pdf                       # Diagrama Entidade-Relacionamento
+   ├─ RelatorioTecnico.md
+   └─ README.md
+```
