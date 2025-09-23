@@ -4,30 +4,32 @@
 
 🔶 1. Modelagem Conceitual (Diagrama Entidade-Relacionamento)
 
+🗞️ Regras de negócio
+
+- Gerar multa por atraso: Atrasos na devolução do veículo geram penalidade ou impedem novas alocações por X dias. (50 reais/dia)
+- Controle de disponibilidade: Veículos só podem ser alocados se estiverem disponíveis no horário desejado (sem conflito com outras reservas).
+- Checklist de estado: Na retirada e devolução do veículo, devem ser registrados quilometragem e etc
+- Um veículo só pode ser alocado se tiver uma reserva já prevista cadastrada
+
 📌 Entidades principais
 
 | Entidade          | Atributos                                  |
 |-------------------|--------------------------------------------|
 | Usuário           | id, nome, email, perfil, bloqueado         |
-| Veículo           | id, placa, modelo, categoria, status       |
-| Reserva           | id, usuario_id, veiculo_id, início, fim, status |
+| Veículo           | id, placa, modelo, categoria, disponível    |
+| Reserva           | id, usuario_id, veiculo_id, inicio_previsto, final_previsto, status|
 | Alocação          | id, reserva_id, km_saida, km_retorno, data_saida, data_retorno |
-| Multa             | id, usuario_id, motivo, valor, data        |
-| Categoria de Veículo | id, nome, descrição                       |
+| Multa             | id, alocacao_id, motivo, valor, data        |
 
+Usuário: dados dos clientes da locadora
+Veículo: dados dos veículos disponíveis
+Reserva: Reserva feita com antecedência para alugar um veículo
+Alocação: Dados sobre o carro na retirada do veículo e no retorno
+Multa: campo gerado caso haja atraso na devolutiva da alocação
 
 🔗 Relacionamentos
 
-- Usuário 1:N Reserva
-- Reserva 1:1 Alocação
-- Usuário 1:N Multa
-- Veículo 1:N Reserva
-- Categoria de Veículo 1:N Veículo
-
-🧾 Justificativas
-
-1. Um usuário pode fazer várias reservas, mas cada reserva pertence a um único usuário.
-2. Cada reserva pode gerar no máximo uma alocação, representando o uso real do veículo.
-3. Um veículo pode ser reservado muitas vezes, mas pertence a uma única categoria.
-4. Um usuário pode receber várias multas por diferentes infrações.
-5. Cada veículo pertence a apenas uma categoria, mas uma categoria pode agrupar vários veículos.
+- Usuário 1:N Reserva = um usuário pode fazer várias reservas.
+- Veículo 1:N Reserva = um veículo pode ser reservado várias vezes (em períodos distintos).
+- Reserva 1:1 Alocação = cada reserva pode gerar no máximo uma alocação.
+- Alocação 1:N Multa = uma alocação pode ter várias multas.
