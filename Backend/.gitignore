@@ -1,0 +1,14 @@
+# Ignora a pasta do ambiente virtual
+# O seu venv está dentro da pasta Backend, então usamos o caminho relativo
+CarGarage/Backend/venv/
+
+# Ignora arquivos de cache do Python
+__pycache__/
+
+# Ignora arquivos temporários e de configuração de IDEs (opcional, mas recomendado)
+.vscode/
+.idea/
+
+# Ignora o arquivo do banco de dados SQLite, pois ele é gerado automaticamente
+# pela sua aplicação
+site.db
