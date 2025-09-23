@@ -106,7 +106,7 @@ O sistema deve controlar o cadastro de carros, usuários, reservas, alocações,
 
 * **Backend:** Python (Flask) com SQLAlchemy para ORM
 * **Frontend:** React
-* **Banco de dados:** PostgreSQL ou SQLite
+* **Banco de dados:** SQLite
 * **Autenticação:** JWT (para REST) ou sessão (para apps simples)
 
 ---
