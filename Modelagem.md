@@ -21,6 +21,8 @@
 | Alocação          | id, reserva_id, km_saida, km_retorno, data_saida, data_retorno |
 | Multa             | id, alocacao_id, motivo, valor, data        |
 
+reserva.status = (previsto, cancelada, realizada)
+
 Usuário: dados dos clientes da locadora
 Veículo: dados dos veículos disponíveis
 Reserva: Reserva feita com antecedência para alugar um veículo
@@ -33,3 +35,6 @@ Multa: campo gerado caso haja atraso na devolutiva da alocação
 - Veículo 1:N Reserva = um veículo pode ser reservado várias vezes (em períodos distintos).
 - Reserva 1:1 Alocação = cada reserva pode gerar no máximo uma alocação.
 - Alocação 1:N Multa = uma alocação pode ter várias multas.
+
+<img width="1119" height="453" alt="cargarage_1" src="https://github.com/user-attachments/assets/f137b58d-1e6d-42ad-906d-a4bf7fe61529" />
+Feito em DBDesigner
