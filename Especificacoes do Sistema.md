@@ -122,12 +122,3 @@ O sistema deve controlar o cadastro de carros, usuários, reservas, alocações,
 * `categorias (id, nome, regras_especiais)`
 
 ---
-
-Se quiser, posso te ajudar a montar:
-
-* Diagrama entidade-relacionamento (DER)
-* Estrutura de diretórios do projeto
-* Lista de rotas da API Flask
-* Mock de telas React
-
-Quer seguir por alguma dessas partes agora?
