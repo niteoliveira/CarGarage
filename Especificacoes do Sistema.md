@@ -129,6 +129,7 @@ O sistema deve controlar o cadastro de carros, usuários, reservas, alocações,
 - Flask (Backend)
 - SQLAlchemy (ORM)
 - React (frontend)
+- SQLite (Banco de Dados)
 
 Esboço da estrutura de pastas
 ```bash
