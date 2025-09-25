@@ -1,9 +1,3 @@
-Você pode adaptar a ideia do sistema de biblioteca universitária para um **sistema de alocação de carros** (por exemplo, para uma frota institucional, empresa ou locadora) mantendo a estrutura geral, mas mudando os **entidades**, **relacionamentos** e **regras de negócio**.
-
-Abaixo, segue uma versão adaptada para o seu novo cenário: **Sistema de Gerenciamento de Alocação de Carros**.
-
----
-
 ## 🎯 **Objetivo do Sistema**
 
 Projetar e implementar um sistema para **gerenciar a alocação de veículos** por usuários autorizados (funcionários, professores, técnicos, etc) de uma instituição.
