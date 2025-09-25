@@ -41,9 +41,6 @@ with app.app_context():
     db.session.add(m1)
     db.session.commit()
 
-    # -----------------------------
-    # Consultar e imprimir dados
-    # -----------------------------
     print("Usuarios:", Usuario.query.all())
     print("Veiculos:", Veiculo.query.all())
     print("Reservas:", Reserva.query.all())

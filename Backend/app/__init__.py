@@ -1,6 +1,9 @@
+# arquivo que cria o banco de dados e adiciona as tabelas (objetos) definidas em models 
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+# instância geral do anco sqlite
 db = SQLAlchemy()
 
 def create_app():
