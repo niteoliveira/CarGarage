@@ -13,6 +13,9 @@ def create_app():
 
     db.init_app(app)
 
+    from .routes.alocacao_routes import alocacao_bp
+    app.register_blueprint(alocacao_bp, url_prefix='/api')
+
     from .models.usuario import Usuario
     from .models.veiculo import Veiculo
     from .models.reserva import Reserva

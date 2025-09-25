@@ -1,5 +1,5 @@
 from ..models.alocacao import Alocacao
-from app import db
+from .. import db
 from datetime import date
 
 def create_alocacao(reserva_id: int, km_saida: float, km_retorno: float, data_saida: date, data_retorno: date):
@@ -47,3 +47,10 @@ def delete_alocacao(alocacao_id: int):
         raise
     
     return True
+
+def get_all_alocacoes():
+    """
+    Retorna todas as alocações do banco
+    """
+    alocacoes = Alocacao.query.all()
+    return alocacoes
