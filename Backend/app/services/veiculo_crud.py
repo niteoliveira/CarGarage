@@ -54,3 +54,6 @@ def delete_veiculo(veiculo_id: int):
         raise
     
     return True
+
+def get_all_veiculos():
+    return Veiculo.query.all()
