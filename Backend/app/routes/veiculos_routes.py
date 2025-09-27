@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify
+from app.models.veiculo import CategoriaVeiculo
+
 from app.services.veiculo_crud import (
     create_veiculo,
     get_veiculo_by_id,
@@ -6,7 +8,6 @@ from app.services.veiculo_crud import (
     delete_veiculo,
     get_all_veiculos
 )
-from app.models.veiculo import CategoriaVeiculo
 
 veiculo_bp = Blueprint('veiculo', __name__)
 

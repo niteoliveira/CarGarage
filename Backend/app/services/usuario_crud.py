@@ -43,3 +43,7 @@ def delete_usuario(usuario_id: int):
         raise
 
     return True
+
+def get_all_usuarios():
+    usuarios = Usuario.query.all()
+    return usuarios

@@ -60,3 +60,7 @@ def delete_reserva(reserva_id: int):
         raise
     
     return True
+
+def get_all_reservas():
+    reservas = Reserva.query.all()
+    return reservas

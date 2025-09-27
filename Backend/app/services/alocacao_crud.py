@@ -49,8 +49,5 @@ def delete_alocacao(alocacao_id: int):
     return True
 
 def get_all_alocacoes():
-    """
-    Retorna todas as alocações do banco
-    """
     alocacoes = Alocacao.query.all()
     return alocacoes

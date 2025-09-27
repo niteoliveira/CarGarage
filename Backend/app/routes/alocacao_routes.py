@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
+
 from app.services.alocacao_crud import (
     create_alocacao, 
     get_alocacao_by_id, 
@@ -7,6 +8,7 @@ from app.services.alocacao_crud import (
     delete_alocacao,
     get_all_alocacoes
 )
+
 alocacao_bp = Blueprint('alocacao',__name__)
 
 @alocacao_bp.route('/alocacoes', methods=['GET'])
@@ -16,8 +18,7 @@ def listar_alocacoes():
     """
     try:
         alocacoes = get_all_alocacoes()
-        
-        # Converter lista de objetos para JSON
+
         alocacoes_json = []
         for alocacao in alocacoes:
             alocacoes_json.append({

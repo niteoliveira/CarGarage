@@ -46,3 +46,7 @@ def delete_multa(multa_id: int):
         raise
 
     return True
+
+def get_all_multas():
+    multas = Multa.query.all()
+    return multas
