@@ -1,183 +1,87 @@
-## 🎯 **Objetivo do Sistema**
+Repositório destinado ao projeto acadêmico da matéria de Banco de Dados 2, o mesmo tem o objetivo de implementar um sistema para gerenciar uma locadora de carros.
 
-Projetar e implementar um sistema para **gerenciar a alocação de veículos** por usuários autorizados (funcionários, professores, técnicos, etc) de uma instituição.
+## 🎯 Objetivo
+Criar um sistema que:
+- Implemente o uso de ORM
+- Torne possível a consulta ao banco de dados
+- Implemente as regras de negócio
 
-O sistema deve controlar o cadastro de carros, usuários, reservas, alocações, devoluções, disponibilidade dos veículos e aplicar regras como limites por perfil, restrições de uso, e penalidades por atrasos.
+<h1 align="center">🚗 CarGarage</h1>
 
----
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLAlchemy-blue?style=for-the-badge&logo=sqlalchemy&logoColor=white" />
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+  <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
+</div>
 
-## 🧱 **Entidades principais**
+## 💻 Como rodar
 
-| Entidade                 | Descrição                                                                                                                  |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **Usuário**              | Pessoa autorizada a alocar veículos. Pode ser funcionário, professor, técnico, etc.                                        |
-| **Veículo**              | Carros disponíveis para alocação. Inclui informações como placa, modelo, ano, categoria, combustível, etc.                 |
-| **Reserva**              | Pedido para uso futuro de um veículo em um intervalo de tempo.                                                             |
-| **Alocação**             | Evento de uso efetivo de um veículo por um usuário. Pode ser transformado a partir de uma reserva ou iniciado diretamente. |
-| **Devolução**            | Finalização de uma alocação. Deve registrar data/hora de retorno, quilometragem final e condições do veículo.              |
-| **Categoria de veículo** | Classificação dos veículos (pequeno, médio, SUV, utilitário, etc), que pode afetar a permissão ou prioridade de uso.       |
-| **Perfil de usuário**    | Define as permissões de alocação, como tempo máximo, número de alocações simultâneas, e categorias permitidas.             |
-| **Multa/Penalidade**     | Aplicada por atrasos, não comparecimento ou uso indevido do veículo.                                                       |
-
----
-
-## 🔒 **Regras de negócio sugeridas**
-
-1. **Limite de alocações por perfil de usuário**
-
-   * Exemplo: técnicos podem reservar no máximo 2 veículos por semana; professores 1 por vez, etc.
-
-2. **Multa por atraso**
-
-   * Atrasos na devolução do veículo geram penalidade ou impedem novas alocações por X dias.
-
-3. **Controle de disponibilidade**
-
-   * Veículos só podem ser alocados se estiverem disponíveis no horário desejado (sem conflito com outras reservas).
-
-4. **Reserva obrigatória antecipada**
-
-   * Algumas categorias de usuário só podem usar um veículo com reserva feita com antecedência mínima (ex: 24h).
-
-5. **Prioridade ou exclusividade por categoria**
-
-   * Certos veículos (como caminhonetes) podem estar disponíveis apenas para certos setores ou perfis.
-
-6. **Checklist de saída e devolução**
-
-   * Na retirada e devolução do veículo, devem ser registrados quilometragem, nível de combustível, estado geral (avarias, limpeza, etc).
-
-7. **Regras de uso contínuo**
-
-   * Uma alocação não pode ultrapassar, por exemplo, 72h sem justificativa especial.
-
----
-
-## 📋 Funcionalidades principais do sistema
-
-### 🔐 Autenticação
-
-* Login para usuários e administradores.
-* Sistema de permissões baseado no perfil.
-
-### 🚗 Veículos
-
-* Cadastro e edição de veículos.
-* Visualização de veículos disponíveis.
-
-### 👤 Usuários
-
-* Cadastro de usuários com perfil (funcionário, professor, técnico, etc).
-* Histórico de alocações e penalidades.
-
-### 📅 Alocação / Reserva
-
-* Criar reservas (com verificação de disponibilidade).
-* Iniciar alocação (automática a partir da reserva ou direta).
-* Finalizar alocação (devolução).
-* Cancelar reserva/alocação (com ou sem penalidade dependendo da antecedência).
-
-### 📊 Administração
-
-* Relatórios de uso por período, por usuário ou por veículo.
-* Visualização de reservas pendentes.
-* Controle de penalidades.
-
----
-
-## 🧭 Exemplo de fluxo de uso
-
-1. **Usuário entra no sistema**
-2. **Visualiza veículos disponíveis**
-3. **Faz uma reserva para um veículo de sua categoria**
-4. **No horário agendado, retira o veículo e inicia a alocação**
-5. **Após o uso, devolve o carro, registra o checklist**
-6. **Sistema registra atraso (se houver), aplica penalidade (se necessário)**
-
----
-
-## 📦 Tecnologia sugerida
-
-* **Backend:** Python (Flask) com SQLAlchemy para ORM
-* **Frontend:** React
-* **Banco de dados:** SQLite
-* **Autenticação:** JWT (para REST) ou sessão (para apps simples)
-
----
-
-## 🔧 Possível estrutura de banco de dados
-
-* `usuarios (id, nome, email, perfil, bloqueado)`
-* `veiculos (id, modelo, placa, categoria, status)`
-* `reservas (id, usuario_id, veiculo_id, inicio_previsto, fim_previsto, status)`
-* `alocacoes (id, reserva_id, data_inicio, data_fim, km_inicio, km_fim)`
-* `devolucoes (id, alocacao_id, data_devolucao, observacoes)`
-* `multas (id, usuario_id, motivo, valor, data, resolvida)`
-* `categorias (id, nome, regras_especiais)`
-
----
-
-# Stack utilizada
-
-- Python (Linguagem OO)
-- Flask (Backend)
-- SQLAlchemy (ORM)
-- React (frontend)
-- SQLite (Banco de Dados)
-
-Esboço da estrutura de pastas
-```bash
-/projeto-locadora
-│
-├─ backend/                      # API em Flask
-│  ├─ app/                        # Pacote principal da aplicação
-│  │  ├─ __init__.py              # Inicializa a aplicação Flask e o SQLAlchemy
-│  │  ├─ models/                  # Modelos do banco de dados (ORM)
-│  │  │  ├─ __init__.py
-│  │  │  ├─ usuario.py
-│  │  │  ├─ veiculo.py
-│  │  │  ├─ reserva.py
-│  │  │  ├─ alocacao.py
-│  │  │  └─ multa.py
-│  │  ├─ routes/                  # Rotas (endpoints da API)
-│  │  │  ├─ __init__.py
-│  │  │  ├─ usuario_routes.py
-│  │  │  ├─ veiculo_routes.py
-│  │  │  ├─ reserva_routes.py
-│  │  │  ├─ alocacao_routes.py
-│  │  │  └─ multa_routes.py
-│  │  ├─ services/                # Lógica de negócio (opcional, para deixar rotas limpas)
-│  │  │  ├─ __init__.py
-│  │  │  ├─ reserva_service.py
-│  │  │  └─ multa_service.py
-│  │  ├─ schemas/                 # (opcional) validação de dados/serialização (pydantic/marshmallow)
-│  │  └─ config.py                # Configurações (DB URI, variáveis de ambiente)
-│  │
-│  ├─ venv/                       # Ambiente virtual (não versionar no Git)
-│  ├─ app.py                       # Ponto de entrada (inicia a app)
-│  ├─ requirements.txt             # Dependências do Python
-│  └─ instance/                    # Arquivos de configuração local (ex.: dev.sqlite)
-│
-├─ frontend/                       # Aplicação React
-│  ├─ public/
-│  ├─ src/
-│  │  ├─ components/               # Componentes reutilizáveis
-│  │  │  ├─ Navbar.jsx
-│  │  │  └─ Footer.jsx
-│  │  ├─ pages/                    # Páginas principais
-│  │  │  ├─ Home.jsx
-│  │  │  ├─ Usuarios.jsx
-│  │  │  ├─ Veiculos.jsx
-│  │  │  └─ Reservas.jsx
-│  │  ├─ services/                 # Consumo da API (ex.: axios)
-│  │  │  └─ api.js
-│  │  ├─ App.jsx
-│  │  └─ index.jsx
-│  ├─ package.json
-│  └─ vite.config.js (ou similar)
-│
-└─ docs/                           # Documentação
-   ├─ DER.pdf                       # Diagrama Entidade-Relacionamento
-   ├─ RelatorioTecnico.md
-   └─ README.md
+### 📥 1. Clone este repositório e navegue até a pasta do projeto
+Abra o terminal e execute o comando abaixo para clonar o repositório:
 ```
+git clone https://github.com/rfmotaa/ChatBotFuria
+cd cargarage
+```
+
+### 📂 2. Instale as dependências do projeto do backend
+
+```
+cd backend
+python -m venv venv
+.\venv\Scripts\Activate  
+pip install -r requirements.txt
+python main.py
+```
+O terminal mostrará uma mensagem informando que o servidor está no ar.
+
+### 🧠 3. Abra outro terminal, navegue até a pasta do frontend e instale as dependências do frontend
+```
+cd frontend
+npm install
+npm run dev
+```
+O projeto será iniciado em http://localhost:5173/ por padrão. Acesse no navegador.
+
+
+## 📫 Contato
+
+<h2>Rafael Mota</h2>
+
+<p>
+   <a href="https://github.com/rfmotaa"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
+   <a href="mailto:rafaelssoni1000@gmail.com"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
+   <a href="https://www.linkedin.com/in/rfmota/"> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
+</p>
+
+## Inserir links
+
+<h2> Leonardo de Oliveira </h2>
+
+<p>
+   <a href=""> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
+</p>
+
+<h2> João Paulo Burgarelli </h2>
+
+<p>
+   <a href=""> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
+</p>
+
+<h2> João Pedro de Andrade </h2>
+
+<p>
+   <a href=""> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
+   <a href=""> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
+</p>
