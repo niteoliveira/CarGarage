@@ -60,7 +60,6 @@ O projeto será iniciado em http://localhost:5173/ por padrão. Acesse no navega
    <a href="https://www.linkedin.com/in/rfmota/"> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
 </p>
 
-## Inserir links
 
 <h2> Leonardo de Oliveira </h2>
 
