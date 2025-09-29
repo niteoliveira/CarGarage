@@ -81,7 +81,7 @@ O projeto será iniciado em http://localhost:5173/ por padrão. Acesse no navega
 <h2> João Pedro de Andrade </h2>
 
 <p>
-   <a href=""> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
-   <a href=""> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
+   <a href="https://github.com/jpegame"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
+   <a href="mailto:joao.paulo07040520@gmail.com"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a>
    <a href=""> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
 </p>
