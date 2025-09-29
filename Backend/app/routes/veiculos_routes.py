@@ -27,7 +27,8 @@ def listar_veiculos():
                 'modelo': veiculo.modelo,
                 'placa': veiculo.placa,
                 'categoria': veiculo.categoria.value,
-                'disponivel': veiculo.disponivel
+                'disponivel': veiculo.disponivel,
+                'imagem': veiculo.imagem
             })
         
         return jsonify({
@@ -71,7 +72,7 @@ def criar_veiculo():
             modelo=data['modelo'],
             placa=data['placa'],
             categoria=categoria,
-            dispoinvel=data.get('disponivel', True)
+            disponivel=data.get('disponivel', True)
         )
         
         return jsonify({
@@ -82,7 +83,8 @@ def criar_veiculo():
                 'modelo': veiculo.modelo,
                 'placa': veiculo.placa,
                 'categoria': veiculo.categoria.value,
-                'disponivel': veiculo.disponivel
+                'disponivel': veiculo.disponivel,
+                'imagem': veiculo.imagem
             }
         }), 201
         
@@ -112,7 +114,8 @@ def buscar_veiculo(veiculo_id):
                 'modelo': veiculo.modelo,
                 'placa': veiculo.placa,
                 'categoria': veiculo.categoria.value,
-                'disponivel': veiculo.disponivel
+                'disponivel': veiculo.disponivel,
+                'imagem': veiculo.imagem
             }
         }), 200
         
@@ -156,7 +159,8 @@ def atualizar_veiculo(veiculo_id):
                 'modelo': veiculo.modelo,
                 'placa': veiculo.placa,
                 'categoria': veiculo.categoria.value,
-                'disponivel': veiculo.disponivel
+                'disponivel': veiculo.disponivel,
+                'imagem': veiculo.imagem
             }
         }), 200
         

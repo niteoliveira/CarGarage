@@ -35,11 +35,9 @@ def create_app():
     from .models.multa import Multa
 
     with app.app_context():
-        #db.drop_all()
+        db.drop_all()
         db.create_all()
 
-        # Script de inserção manual para dados de teste para a API
-        '''
         from datetime import date
 
         u1 = Usuario(nome="Rafael", email="rafael@email.com", bloqueado=False)
@@ -47,15 +45,22 @@ def create_app():
 
         v1 = Veiculo(modelo="Fiat Uno", placa="ABC-1234", categoria="economico", disponivel=True)
         v2 = Veiculo(modelo="BMW X5", placa="XYZ-5678", categoria="luxo", disponivel=True)
+       
+        v4 = Veiculo(modelo="Fiat Marea", placa="GHI-5432", categoria="economico", disponivel=True)
+        v5 = Veiculo(modelo="Volkswagen Voyage", placa="JKL-1098", categoria="economico", disponivel=True)
 
-        db.session.add_all([u1, u2, v1, v2])
+        db.session.add_all([u1, u2, v1, v2, v4, v5])
         db.session.commit()
 
         r1 = Reserva(usuario_id=u1.id, veiculo_id=v1.id,
                     inicio_previsto=date(2025, 9, 25),
                     final_previsto=date(2025, 9, 30),
                     status="ativa")
-        db.session.add(r1)
+        r2 = Reserva(usuario_id=u2.id, veiculo_id=v2.id,
+                    inicio_previsto=date(2025, 10, 1),
+                    final_previsto=date(2025, 10, 7),
+                    status="ativa")
+        db.session.add_all([r1, r2])
         db.session.commit()
 
         a1 = Alocacao(reserva_id=r1.id, km_saida=1200.0,
@@ -68,6 +73,5 @@ def create_app():
                     data=date(2025, 9, 26))
         db.session.add(m1)
         db.session.commit()
-        '''
 
     return app

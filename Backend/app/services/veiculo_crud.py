@@ -1,14 +1,14 @@
 from ..models.veiculo import Veiculo, CategoriaVeiculo
 from app import db
 
-def create_veiculo(modelo: str, placa: str, categoria: CategoriaVeiculo | str, dispoinvel: bool):
+def create_veiculo(modelo: str, placa: str, categoria: CategoriaVeiculo | str, disponivel: bool):
     if isinstance(categoria, str):
         try:
             categoria = CategoriaVeiculo(categoria)
         except ValueError:
             raise ValueError("Categoria inválida")
 
-    veiculo = Veiculo(modelo=modelo, placa=placa, categoria=categoria, dispoinvel=dispoinvel)
+    veiculo = Veiculo(modelo=modelo, placa=placa, categoria=categoria, disponivel=disponivel)
 
     try:
         db.session.add(veiculo)

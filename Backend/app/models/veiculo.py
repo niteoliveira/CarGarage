@@ -17,5 +17,6 @@ class Veiculo(db.Model):
     placa = db.Column(db.String(255), nullable=False)
     categoria = db.Column(Enum(CategoriaVeiculo), nullable=False)
     disponivel = db.Column(db.Boolean, nullable=False, default=True)
+    imagem = db.Column(db.String(255), nullable=True)
 
     reservas = db.relationship('Reserva', back_populates='veiculo')

@@ -177,6 +177,22 @@ function ClientePortal({ user, onLogin, onLogout, onNavigateHome }) {
             ) : (
               veiculos.map(veiculo => (
                 <Card key={veiculo.id} className="veiculo-card">
+                  <img 
+                    src={veiculo.imagem ? `/images/cars/${veiculo.imagem}` : `/images/cars/${veiculo.modelo.toLowerCase().replace(/\s+/g, '-')}.jpg`}
+                    alt={veiculo.modelo}
+                    className="veiculo-image"
+                    onError={(e) => {
+                      if (!veiculo.imagem) {
+                        const svgName = veiculo.modelo.toLowerCase().replace(/\s+/g, '-');
+                        e.target.src = `/images/cars/${svgName}.svg`;
+                        e.target.onerror = () => {
+                          e.target.src = '/images/cars/default.jpg';
+                        };
+                      } else {
+                        e.target.src = '/images/cars/default.jpg';
+                      }
+                    }}
+                  />
                   <h3>{veiculo.modelo}</h3>
                   <p><strong>Placa:</strong> {veiculo.placa}</p>
                   <p><strong>Categoria:</strong> {veiculo.categoria}</p>
