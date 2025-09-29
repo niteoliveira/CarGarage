@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HomePage from './components/HomePage';
 import ClientePortal from './components/ClientePortal';
 import FuncionarioPortal from './components/FuncionarioPortal';
-import { STORAGE_KEYS, USER_TYPES } from './config/constants';
+import { STORAGE_KEYS, USER_TYPES, LAST_VIEW } from './config/constants';
 import './App.css';
 
 function App() {
@@ -12,7 +12,15 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+  useEffect(() => {
+    const view = localStorage.getItem(LAST_VIEW);
+    if (view) {
+      setCurrentView(view);
+    }
+  }, []);
+
   const handleNavigate = (view) => {
+    localStorage.setItem(LAST_VIEW, view);
     setCurrentView(view);
   };
 

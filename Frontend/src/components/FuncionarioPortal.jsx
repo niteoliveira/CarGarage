@@ -7,6 +7,7 @@ import useApi from '../hooks/useApi';
 import './FuncionarioPortal.css';
 
 function FuncionarioPortal({ onNavigateHome }) {
+  const { request, loading, error } = useApi();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [reservas, setReservas] = useState([]);
   const [alocacoes, setAlocacoes] = useState([]);
@@ -15,7 +16,28 @@ function FuncionarioPortal({ onNavigateHome }) {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [itemSelecionado, setItemSelecionado] = useState(null);
-  const { request, loading, error } = useApi();
+  const [possuiMulta, setPossuiMulta] = useState(false);
+  const [expandedRow, setExpandedRow] = useState(null);
+  const params = new URLSearchParams(window.location.search);
+  
+  const handleToggleRow = (id) => {
+    setExpandedRow(expandedRow === id ? null : id);
+  };
+
+  useEffect(() => {
+    const tab = params.get('tab');
+    if (tab && ['dashboard', 'reservas', 'alocacoes'].includes(tab)) {
+      setActiveTab(tab);
+    }
+  }, [params]);
+
+  const handleChangeTab = (tab) => {
+    setActiveTab(tab);
+    const newParams = new URLSearchParams(window.location.search);
+    newParams.set('tab', tab);
+    const newUrl = `${window.location.pathname}?${newParams.toString()}`;
+    window.history.replaceState(null, '', newUrl);
+  }
 
   // Estados dos formulários
   const [alocacaoForm, setAlocacaoForm] = useState({
@@ -26,6 +48,12 @@ function FuncionarioPortal({ onNavigateHome }) {
   const [devolucaoForm, setDevolucaoForm] = useState({
     km_retorno: '',
     data_retorno: new Date().toISOString().split('T')[0],
+  });
+
+  const [multaForm, setMultaForm] = useState({
+    motivo: '',
+    valor: '',
+    data: new Date().toISOString().split('T')[0],
   });
 
   useEffect(() => {
@@ -103,6 +131,16 @@ function FuncionarioPortal({ onNavigateHome }) {
         km_retorno: parseFloat(devolucaoForm.km_retorno),
         data_retorno: devolucaoForm.data_retorno,
       }));
+      if (possuiMulta) {
+        await request(() => api.createMulta({
+          alocacao_id: itemSelecionado.id,
+          motivo: multaForm.motivo,
+          valor: parseFloat(multaForm.valor),
+          data: multaForm.data,
+        }));
+      }
+
+      await api.updateReserva(itemSelecionado.reserva_id, { status: 'concluida' });
 
       alert('Alocação finalizada com sucesso!');
       setShowModal(false);
@@ -140,19 +178,19 @@ function FuncionarioPortal({ onNavigateHome }) {
         <nav className="funcionario-nav">
           <Button 
             variant={activeTab === 'dashboard' ? 'primary' : 'secondary'}
-            onClick={() => setActiveTab('dashboard')}
+            onClick={() => handleChangeTab('dashboard')}
           >
             📊 Dashboard
           </Button>
           <Button 
             variant={activeTab === 'reservas' ? 'primary' : 'secondary'}
-            onClick={() => setActiveTab('reservas')}
+            onClick={() => handleChangeTab('reservas')}
           >
             📋 Reservas
           </Button>
           <Button 
             variant={activeTab === 'alocacoes' ? 'primary' : 'secondary'}
-            onClick={() => setActiveTab('alocacoes')}
+            onClick={() => handleChangeTab('alocacoes')}
           >
             🚗 Alocações
           </Button>
@@ -247,33 +285,76 @@ function FuncionarioPortal({ onNavigateHome }) {
                     <th>Data Retorno</th>
                     <th>Status</th>
                     <th>Ações</th>
+                    <th>Multas</th>
                   </tr>
                 </thead>
                 <tbody>
                   {alocacoes.map(alocacao => (
-                    <tr key={alocacao.id}>
-                      <td>#{alocacao.id}</td>
-                      <td>#{alocacao.reserva_id}</td>
-                      <td>{alocacao.km_saida}</td>
-                      <td>{alocacao.km_retorno || '-'}</td>
-                      <td>{alocacao.data_saida}</td>
-                      <td>{alocacao.data_retorno}</td>
-                      <td>
-                        <span className={`status ${alocacao.km_retorno ? 'status-concluida' : 'status-ativa'}`}>
-                          {alocacao.km_retorno ? 'Finalizada' : 'Em Andamento'}
-                        </span>
-                      </td>
-                      <td>
-                        {!alocacao.km_retorno && (
-                          <Button 
-                            variant="success" 
-                            onClick={() => handleFinalizarAlocacao(alocacao)}
-                          >
-                            Finalizar
-                          </Button>
-                        )}
-                      </td>
-                    </tr>
+                    <>
+                      <tr key={alocacao.id}>
+                        <td>#{alocacao.id}</td>
+                        <td>#{alocacao.reserva_id}</td>
+                        <td>{alocacao.km_saida}</td>
+                        <td>{alocacao.km_retorno || '-'}</td>
+                        <td>{alocacao.data_saida}</td>
+                        <td>{alocacao.data_retorno}</td>
+                        <td>
+                          <span className={`status ${alocacao.km_retorno ? 'status-concluida' : 'status-ativa'}`}>
+                            {alocacao.km_retorno ? 'Finalizada' : 'Em Andamento'}
+                          </span>
+                        </td>
+                        <td>
+                          {!alocacao.km_retorno && (
+                            <Button 
+                              variant="success" 
+                              onClick={() => handleFinalizarAlocacao(alocacao)}
+                            >
+                              Finalizar
+                            </Button>
+                          )}
+                        </td>
+                        <td>
+                          {alocacao.multas && alocacao.multas.length > 0 && (
+                            <Button variant="link" onClick={() => handleToggleRow(alocacao.id)}>
+                              {expandedRow === alocacao.id ? '↑' : '↓'}
+                            </Button>
+                          )}
+                        </td>
+                      </tr>
+                      {expandedRow === alocacao.id && (
+                        <tr>
+                          <td colSpan="9">
+                            <div className="expanded-row-content">
+                              <h4>Multas Associadas:</h4>
+                              {alocacao.multas && alocacao.multas.length > 0 ? (
+                                <table className="nested-table">
+                                  <thead>
+                                    <tr>
+                                      <th>ID</th>
+                                      <th>Motivo</th>
+                                      <th>Valor (R$)</th>
+                                      <th>Data</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {alocacao.multas.map(multa => (
+                                      <tr key={multa.id}>
+                                        <td>#{multa.id}</td>
+                                        <td>{multa.motivo}</td>
+                                        <td>{multa.valor.toFixed(2)}</td>
+                                        <td>{multa.data}</td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              ) : (
+                                <p>Nenhuma multa associada a esta alocação.</p>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </>
                   ))}
                 </tbody>
               </table>
@@ -362,7 +443,57 @@ function FuncionarioPortal({ onNavigateHome }) {
                 required
               />
             </div>
+            
+            <div className="form-group">
+              <label className="form-label">Possui Multa?</label>
+              <select
+                className="form-control"
+                value={possuiMulta ? 'sim' : 'nao'}
+                onChange={(e) => setPossuiMulta(e.target.value === 'sim')}
+              >
+                <option value="nao">Não</option>
+                <option value="sim">Sim</option>
+              </select>
+            </div>
 
+            {possuiMulta && (
+              <>
+                <div className="form-group">
+                  <label className="form-label">Motivo da multa:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Descreva o motivo da multa"
+                    value={multaForm.motivo}
+                    onChange={(e) => setMultaForm({...multaForm, motivo: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Valor da multa (R$):</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="Ex: 150.00"
+                    min="0"
+                    step="0.01"
+                    required
+                    value={multaForm.valor}                    
+                    onChange={(e) => setMultaForm({...multaForm, valor: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Data da multa:</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    value={multaForm.data}
+                    onChange={(e) => setMultaForm({...multaForm, data: e.target.value})}
+                    required
+                  />
+                </div>
+              </>
+            )}
             <div className="modal-actions">
               <Button type="button" variant="secondary" onClick={() => setShowModal(false)}>
                 Cancelar

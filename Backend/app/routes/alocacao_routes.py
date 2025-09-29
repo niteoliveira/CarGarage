@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
+from app.services.multa_crud import (
+    get_multas_by_alocacao
+)
 from app.services.alocacao_crud import (
     create_alocacao, 
     get_alocacao_by_id, 
@@ -20,13 +23,24 @@ def listar_alocacoes():
         # Converter lista de objetos para JSON
         alocacoes_json = []
         for alocacao in alocacoes:
+            multas = get_multas_by_alocacao(alocacao.id)
+
             alocacoes_json.append({
                 'id': alocacao.id,
                 'reserva_id': alocacao.reserva_id,
                 'km_saida': alocacao.km_saida,
                 'km_retorno': alocacao.km_retorno,
                 'data_saida': alocacao.data_saida.isoformat(),
-                'data_retorno': alocacao.data_retorno.isoformat()
+                'data_retorno': alocacao.data_retorno.isoformat(),
+                'multas': [
+                    {
+                        'id': multa.id,
+                        'alocacao_id': multa.alocacao_id,
+                        'motivo': multa.motivo,
+                        'valor': multa.valor,
+                        'data': multa.data.isoformat()
+                    } for multa in multas
+                ]
             })
         
         return jsonify({

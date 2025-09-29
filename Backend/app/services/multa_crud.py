@@ -50,3 +50,7 @@ def delete_multa(multa_id: int):
 def get_all_multas():
     multas = Multa.query.all()
     return multas
+
+def get_multas_by_alocacao(alocacao_id: int) -> list[Multa]:
+    multas = Multa.query.filter_by(alocacao_id=alocacao_id).all()
+    return multas

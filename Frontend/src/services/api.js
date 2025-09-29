@@ -82,6 +82,13 @@ export const api = {
       return [];
     }
   },
+  updateReserva: async (id, data) => {
+    const response = await apiRequest(`/reservas/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+    return response.data || response;
+  },
 
   // Alocações
   getAlocacoes: async () => {
@@ -114,6 +121,24 @@ export const api = {
     const response = await apiRequest('/multas');
     return response.data || response;
   },
+
+  getMultasPorAlocacao: async (alocacaoId) => {
+    try {
+      const response = await apiRequest(`/multas/alocacao/${alocacaoId}`);
+      return response.data || response;
+    } catch (error) {
+      console.error('Erro ao buscar multas por alocação:', error);
+      return [];
+    }
+  },
+
+  createMulta: async (data) => {
+    const response = await apiRequest('/multas', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    return response.data || response;
+  }
 };
 
 export default api;

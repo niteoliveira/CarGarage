@@ -6,7 +6,8 @@ from app.services.multa_crud import (
     get_multa_by_id,
     update_multa,
     delete_multa,
-    get_all_multas
+    get_all_multas,
+    get_multas_by_alocacao
 )
 
 multa_bp = Blueprint('multa', __name__)
@@ -34,6 +35,33 @@ def listar_multas():
         }), 200
     except Exception:
         return jsonify({'success': False, 'error': 'Erro interno do servidor'}), 500
+    
+@ multa_bp.route('/multas/alocacao/<int:alocacao_id>', methods=['GET'])
+def listar_multas_por_alocacao(alocacao_id):
+    """
+    GET /api/multas/alocacao_id - Lista todas as multas de uma alocação específica
+    """
+    try:
+        multas = get_multas_by_alocacao(alocacao_id)
+        multas_json = []
+        for multa in multas:
+            multas_json.append({
+                'id': multa.id,
+                'alocacao_id': multa.alocacao_id,
+                'motivo': multa.motivo,
+                'valor': multa.valor,
+                'data': multa.data.isoformat()
+            })
+        return jsonify({
+            'success': True,
+            'count': len(multas_json),
+            'data': multas_json
+        }), 200
+    except ValueError as e:
+        return jsonify({'success': False, 'error': str(e)}), 400
+    except Exception:
+        return jsonify({'success': False, 'error': 'Erro interno do servidor'}), 500
+
 
 @ multa_bp.route('/multas', methods=['POST'])
 def criar_multa():

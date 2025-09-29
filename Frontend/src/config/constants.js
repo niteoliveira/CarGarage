@@ -5,6 +5,8 @@ export const STORAGE_KEYS = {
   USER_TYPE: 'cargarage_user_type',
 };
 
+export const LAST_VIEW = 'cargarage_last_view';
+
 export const USER_TYPES = {
   CLIENTE: 'cliente',
   FUNCIONARIO: 'funcionario',
