@@ -1,7 +1,7 @@
 Repositório destinado ao projeto acadêmico da matéria de Banco de Dados 2, o mesmo tem o objetivo de implementar um sistema para gerenciar uma locadora de carros.
 
 ## 🎯 Objetivo
-Criar um sistema que:
+Criar um sistema sobre alocação de automóveis que:
 - Implemente o uso de ORM
 - Torne possível a consulta ao banco de dados
 - Implemente as regras de negócio
