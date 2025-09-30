@@ -27,7 +27,7 @@ function HomePage({ onNavigate }) {
         </div>
         
         <footer className="homepage-footer">
-          <p>Desenvolvido para trabalho acadêmico</p>
+          <p>Desenvolvido por ADS_4</p>
         </footer>
       </div>
     </div>
