@@ -77,7 +77,7 @@ O projeto será iniciado em http://localhost:5173/ por padrão. Acesse no navega
    <a href=""> <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" /> </a>
 </p>
 
-<h2> João Pedro de Andrade </h2>
+<h2> João Paulo </h2>
 
 <p>
    <a href="https://github.com/jpegame"> <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" /> </a>
