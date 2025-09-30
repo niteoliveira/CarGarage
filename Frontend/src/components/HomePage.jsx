@@ -6,20 +6,20 @@ function HomePage({ onNavigate }) {
     <div className="homepage">
       <div className="homepage-container">
         <header className="homepage-header">
-          <h1>🚗 CarGarage</h1>
+          <h1>CarGarage</h1>
           <p>Sistema de Locação de Veículos</p>
         </header>
         
         <div className="homepage-cards">
           <Card
-            title="👤 Sou Cliente"
+            title="Sou Cliente"
             description="Fazer reservas de veículos e consultar meus agendamentos"
             onClick={() => onNavigate('cliente')}
             className="homepage-card"
           />
           
           <Card
-            title="👔 Sou Funcionário"
+            title="Sou Funcionário"
             description="Gerenciar alocações, devoluções e sistema administrativo"
             onClick={() => onNavigate('funcionario')}
             className="homepage-card"

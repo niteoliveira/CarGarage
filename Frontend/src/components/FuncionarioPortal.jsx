@@ -171,7 +171,7 @@ function FuncionarioPortal({ onNavigateHome }) {
         {/* Header */}
         <div className="funcionario-header">
           <Button variant="secondary" onClick={onNavigateHome}>← Voltar</Button>
-          <h1>👔 Portal do Funcionário</h1>
+          <h1>Portal do Funcionário</h1>
         </div>
 
         {/* Navegação */}
@@ -180,19 +180,19 @@ function FuncionarioPortal({ onNavigateHome }) {
             variant={activeTab === 'dashboard' ? 'primary' : 'secondary'}
             onClick={() => handleChangeTab('dashboard')}
           >
-            📊 Dashboard
+            Dashboard
           </Button>
           <Button 
             variant={activeTab === 'reservas' ? 'primary' : 'secondary'}
             onClick={() => handleChangeTab('reservas')}
           >
-            📋 Reservas
+            Reservas
           </Button>
           <Button 
             variant={activeTab === 'alocacoes' ? 'primary' : 'secondary'}
             onClick={() => handleChangeTab('alocacoes')}
           >
-            🚗 Alocações
+            Alocações
           </Button>
         </nav>
 

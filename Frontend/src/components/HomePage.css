@@ -1,71 +1,105 @@
 .homepage {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-primary-50) 50%, var(--color-gray-50) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  position: relative;
+}
+
+.homepage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .homepage-container {
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .homepage-header {
-  margin-bottom: 3rem;
-  color: white;
+  margin-bottom: 4rem;
 }
 
 .homepage-header h1 {
-  font-size: 3rem;
-  margin: 0 0 0.5rem 0;
+  font-size: 3.5rem;
+  margin: 0 0 1rem 0;
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--color-slate);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .homepage-header p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0;
-  opacity: 0.9;
+  color: var(--color-secondary);
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .homepage-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .homepage-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--color-white);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--color-gray-200);
+  position: relative;
 }
 
 .homepage-card:hover {
-  background: rgba(255, 255, 255, 1);
+  background: var(--color-white);
   transform: translateY(-4px);
+  border-color: var(--color-primary-200);
 }
 
 .homepage-footer {
-  color: white;
+  color: var(--color-secondary);
   opacity: 0.8;
 }
 
 .homepage-footer p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
 }
 
 @media (max-width: 768px) {
+  .homepage {
+    padding: 1rem;
+  }
+
+  .homepage-header {
+    margin-bottom: 3rem;
+  }
+
   .homepage-header h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .homepage-header p {
+    font-size: 1.125rem;
   }
   
   .homepage-cards {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
   }
 }

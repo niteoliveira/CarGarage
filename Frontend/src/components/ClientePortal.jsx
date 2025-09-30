@@ -170,7 +170,7 @@ function ClientePortal({ user, onLogin, onLogout, onNavigateHome }) {
 
         {/* Seção de Veículos Disponíveis */}
         <section className="section">
-          <h2>🚗 Veículos Disponíveis</h2>
+          <h2>Veículos Disponíveis</h2>
           <div className="veiculos-grid">
             {veiculos.length === 0 ? (
               <p>Nenhum veículo disponível no momento.</p>
@@ -207,7 +207,7 @@ function ClientePortal({ user, onLogin, onLogout, onNavigateHome }) {
 
         {/* Seção de Minhas Reservas */}
         <section className="section">
-          <h2>📋 Minhas Reservas</h2>
+          <h2>Minhas Reservas</h2>
           {minhasReservas.length === 0 ? (
             <p>Você ainda não tem reservas.</p>
           ) : (
