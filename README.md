@@ -26,7 +26,7 @@ Criar um sistema sobre alocação de automóveis que:
 ### 📥 1. Clone este repositório e navegue até a pasta do projeto
 Abra o terminal e execute o comando abaixo para clonar o repositório:
 ```
-git clone https://github.com/rfmotaa/ChatBotFuria
+git clone https://github.com/niteoliveira/CarGarage.git
 cd cargarage
 ```
 
